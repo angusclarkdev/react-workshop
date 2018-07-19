@@ -2,20 +2,20 @@ import React from "react";
 import ReactDOM from "react-dom";
 import serializeForm from "form-serialize";
 
-class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>Forms</h1>
-        <form>
-          <input type="text" />
-        </form>
-      </div>
-    );
-  }
-}
+// class App extends React.Component {
+//   render() {
+//     return (
+//       <div>
+//         <h1>Forms</h1>
+//         <form>
+//           <input type="text" />
+//         </form>
+//       </div>
+//     );
+//   }
+// }
 
-ReactDOM.render(<App />, document.getElementById("app"));
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Give the <input> a default value.
@@ -32,6 +32,7 @@ ReactDOM.render(<App />, document.getElementById("app"));
 //     );
 //   }
 // }
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Access the value using event.target.
@@ -56,6 +57,7 @@ ReactDOM.render(<App />, document.getElementById("app"));
 //     );
 //   }
 // }
+// ReactDOM.render(<App />, document.getElementById("app"));
 
 ////////////////////////////////////////////////////////////////////////////////
 // Or use a ref.
@@ -105,10 +107,10 @@ ReactDOM.render(<App />, document.getElementById("app"));
 //             type="text"
 //             ref={node => (this.input = node)}
 //             value={this.state.inputValue}
-//             onChange={this.handleChange}
+//             // onChange={this.handleChange}
 //           />
 //         </form>
-//         <pre>{JSON.stringify(this.state, null, 2)}</pre>
+//         {/* <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
 //       </div>
 //     );
 //   }
@@ -122,7 +124,7 @@ ReactDOM.render(<App />, document.getElementById("app"));
 //     inputValue: "cupcakes"
 //   };
 
-//   handleChange = () => {
+//   handleChange = (e) => {
 //     this.setState({
 //       inputValue: this.input.value
 //     });
@@ -270,3 +272,4 @@ ReactDOM.render(<App />, document.getElementById("app"));
 // 3. Multiple parts of the app manipulate the state, changes need
 //    to be reflected in the input (two-way), use `value` and
 //    `onChange`
+ReactDOM.render(<App />, document.getElementById("app"));
