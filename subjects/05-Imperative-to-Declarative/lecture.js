@@ -15,109 +15,109 @@ styles.theremin = {
   display: "inline-block"
 };
 
-class App extends React.Component {
-  componentDidMount() {
-    this.oscillator = createOscillator();
-  }
+// class App extends React.Component {
+//   componentDidMount() {
+//     this.oscillator = createOscillator();
+//   }
 
-  play = () => {
-    this.oscillator.play();
-  };
+//   play = () => {
+//     this.oscillator.play();
+//   };
 
-  stop = () => {
-    this.oscillator.stop();
-  };
+//   stop = () => {
+//     this.oscillator.stop();
+//   };
 
-  changeTone = event => {
-    const { clientX, clientY } = event;
-    const {
-      top,
-      right,
-      bottom,
-      left
-    } = event.target.getBoundingClientRect();
-    const pitch = (clientX - left) / (right - left);
-    const volume = 1 - (clientY - top) / (bottom - top);
+//   changeTone = event => {
+//     const { clientX, clientY } = event;
+//     const {
+//       top,
+//       right,
+//       bottom,
+//       left
+//     } = event.target.getBoundingClientRect();
+//     const pitch = (clientX - left) / (right - left);
+//     const volume = 1 - (clientY - top) / (bottom - top);
 
-    this.oscillator.setPitchBend(pitch);
-    this.oscillator.setVolume(volume);
-  };
+//     this.oscillator.setPitchBend(pitch);
+//     this.oscillator.setVolume(volume);
+//   };
 
-  render() {
-    return (
-      <div>
-        <h1>What does it mean to be declarative?</h1>
-        <div
-          style={styles.theremin}
-          onMouseEnter={this.play}
-          onMouseLeave={this.stop}
-          onMouseMove={this.changeTone}
-        />
-      </div>
-    );
-  }
-}
+//   render() {
+//     return (
+//       <div>
+//         <h1>What does it mean to be declarative?</h1>
+//         <div
+//           style={styles.theremin}
+//           onMouseEnter={this.play}
+//           onMouseLeave={this.stop}
+//           onMouseMove={this.changeTone}
+//         />
+//       </div>
+//     );
+//   }
+// }
 
-ReactDOM.render(<App />, document.getElementById("app"));
+// ReactDOM.render(<App />, document.getElementById("app"));
 
 ////////////////////////////////////////////////////////////////////////////////
 // Can't predict what the sound is going to be by looking at state or the render
 // method, but componentDidUpdate makes things a lot easier to think about.
 
-//class App extends React.Component {
-//  state = {
-//    isPlaying: false,
-//    pitch: 0,
-//    volume: 0
-//  }
-//
-//  componentDidMount() {
-//    this.oscillator = createOscillator()
-//  }
-//
-//  play = () => {
-//    this.setState({ isPlaying: true })
-//  }
-//
-//  stop = () => {
-//    this.setState({ isPlaying: false })
-//  }
-//
-//  changeTone = (event) => {
-//    const { clientX, clientY } = event
-//    const { top, right, bottom, left } = event.target.getBoundingClientRect()
-//    const pitch = (clientX - left) / (right - left)
-//    const volume = 1 - (clientY - top) / (bottom - top)
-//    this.setState({ pitch, volume })
-//  }
-//
-//  componentDidUpdate() {
-//    if (this.state.isPlaying) {
-//      this.oscillator.play()
-//    } else {
-//      this.oscillator.stop()
-//    }
-//
-//    this.oscillator.setPitchBend(this.state.pitch)
-//    this.oscillator.setVolume(this.state.volume)
-//  }
-//
-//  render() {
-//    return (
-//      <div>
-//        <h1>What does it mean to be declarative?</h1>
-//        <div
-//          style={styles.theremin}
-//          onMouseEnter={this.play}
-//          onMouseLeave={this.stop}
-//          onMouseMove={this.changeTone}
-//        />
-//      </div>
-//    )
-//  }
-//}
-//
-//ReactDOM.render(<App/>, document.getElementById('app'))
+class App extends React.Component {
+ state = {
+   isPlaying: false,
+   pitch: 0,
+   volume: 0
+ }
+
+ componentDidMount() {
+   this.oscillator = createOscillator()
+ }
+
+ play = () => {
+   this.setState({ isPlaying: true })
+ }
+
+ stop = () => {
+   this.setState({ isPlaying: false })
+ }
+
+ changeTone = (event) => {
+   const { clientX, clientY } = event
+   const { top, right, bottom, left } = event.target.getBoundingClientRect()
+   const pitch = (clientX - left) / (right - left)
+   const volume = 1 - (clientY - top) / (bottom - top)
+   this.setState({ pitch, volume })
+ }
+
+ componentDidUpdate() {
+   if (this.state.isPlaying) {
+     this.oscillator.play()
+   } else {
+     this.oscillator.stop()
+   }
+
+   this.oscillator.setPitchBend(this.state.pitch)
+   this.oscillator.setVolume(this.state.volume)
+ }
+
+ render() {
+   return (
+     <div>
+       <h1>What does it mean to be declarative?</h1>
+       <div
+         style={styles.theremin}
+         onMouseEnter={this.play}
+         onMouseLeave={this.stop}
+         onMouseMove={this.changeTone}
+       />
+     </div>
+   )
+ }
+}
+
+ReactDOM.render(<App/>, document.getElementById('app'))
 
 ////////////////////////////////////////////////////////////////////////////////
 // We can do even better and make this fully declarative for the <App>. Instead
