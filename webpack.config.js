@@ -44,7 +44,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules|mocha-browser\.js/,
-        loader: "babel"
+        loader: "babel-loader"
       },
       { test: /\.css$/, loader: "style!css" },
       { test: /\.(ttf|eot|svg|png|jpg)$/, loader: "file" },

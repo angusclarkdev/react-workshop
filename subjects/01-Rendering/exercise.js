@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Exercise:
 //
-// - Render `DATA.title` in an <h1>
+// - Render `data.title` in an <h1>
 // - Render a <ul> with each of `DATA.items` as an <li> [x]
 // - Now only render an <li> for mexican food (hint: use DATA.items.filter(...)) [x]
 // - Sort the items in alphabetical order by name (hint: use sort-by https://github.com/staygrimm/sort-by#example)
@@ -13,12 +13,13 @@
 //   function that calls `ReactDOM.render`, and then you'll need to call it in
 //   the event handlers of the form controls)
 ////////////////////////////////////////////////////////////////////////////////
-import React, {Component} from "react";
+import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import sortBy from "sort-by";
 //  import { link } from "fs";
+import './rendering.css'
 
-const DATA = {
+const data = {
   title: "Menu",
   items: [
     { id: 1, name: "tacos", type: "mexican" },
@@ -39,33 +40,38 @@ class Menu extends Component {
       sort: false  
     } 
   } 
- 
- get filterByType() {
-    if (this.state.filtered === "all" && this.state.sort === true) {
-      return DATA.items
-        .sort(sortBy('name'))
-        .map(i => <li key={i.id}> {i.name} </li>)
 
-    } else if (this.state.filtered === "all" && this.state.sort === false) {
-        return DATA.items
-          .map(i => <li key={i.id}> {i.name} </li>)
+  filterByType = () => {
+    let filteredData = [];
+    if (this.state.filtered === 'all') {
 
-    } else if (this.state.sort === true) {
-        return DATA.items
-          .sort(sortBy('name'))
-          .filter(i => i.type === this.state.filtered)
-          .map(i => <li key={i.id}> {i.name} </li>)
+      return this.mapOverItems(data.items)
 
-   } return DATA.items
-     .filter(i => i.type === this.state.filtered)
-     .map(i => <li key={i.id}> {i.name} </li>)
+    } else {
+
+      filteredData = this.filterItems(data.items)
+      return this.mapOverItems(filteredData)
+      
+    }
   }
 
-  // filteredItems = this.filterByType();
+  // sort = (filterByType) => {
+  //   if (this.state.sort === true) {
+  //      filterByType.sort(sortBy('name'))
+  //   }
+  //    return this.filterByType()
+  // }
+
+
+  
+  mapOverItems = items => items.map(i => <li key={i.id}> {i.name} </li>)
+
+  filterItems = items => items.filter(i => i.type === this.state.filtered)
+
   render() { 
     return (
       <div>
-        <h1> {DATA.title} </h1>
+        <h1 className="title"> {data.title} </h1>
         <select name="" id="" onChange={(e) => this.setState({ filtered: e.target.value })}>
           <option value="all"> all </option>
           <option value="mexican"> mexican </option>
@@ -75,7 +81,7 @@ class Menu extends Component {
         <br />
         <button onClick={() => this.setState({ sort: !this.state.sort })}> Sort Alphabetically </button>
         <ul>
-         {this.filterByType}
+         {this.filterByType()}
         </ul>
       </div>  
     )
