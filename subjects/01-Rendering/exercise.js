@@ -20,7 +20,6 @@ import sortBy from "sort-by";
 import './rendering.css'
 
 const data = {
-  title: "Menu",
   items: [
     { id: 1, name: "tacos", type: "mexican" },
     { id: 2, name: "burrito", type: "mexican" },
@@ -37,42 +36,34 @@ class Menu extends Component {
 
     this.state = {
       filtered: 'all',
-      sort: false  
+      sort: false,
+      menuItems: data.items  
     } 
   } 
 
   filterByType = () => {
-    let filteredData = [];
     if (this.state.filtered === 'all') {
+      return this.state.menuItems
 
-      return this.mapOverItems(data.items)
-
-    } else {
-
-      filteredData = this.filterItems(data.items)
-      return this.mapOverItems(filteredData)
-      
-    }
+    }  
+    return this.state.menuItems.filter(i => i.type === this.state.filtered)
   }
 
-  // sort = (filterByType) => {
-  //   if (this.state.sort === true) {
-  //      filterByType.sort(sortBy('name'))
-  //   }
-  //    return this.filterByType()
-  // }
+  sortItems = () => {
+    let sortedItems = this.filterByType();
 
+    if (this.state.sort) {
+      sortedItems = sortedItems.sort(sortBy("name"))
+    }
 
-  
-  mapOverItems = items => items.map(i => <li key={i.id}> {i.name} </li>)
-
-  filterItems = items => items.filter(i => i.type === this.state.filtered)
+    return sortedItems.map(i => <li key={i.id}> {i.name} </li>)
+  }
 
   render() { 
     return (
       <div>
-        <h1 className="title"> {data.title} </h1>
-        <select name="" id="" onChange={(e) => this.setState({ filtered: e.target.value })}>
+        <h1 className="title"> Menu </h1>
+        <select name="" id="" onChange={(e) => this.setState({ filtered: e.target.value, sort: false })}>
           <option value="all"> all </option>
           <option value="mexican"> mexican </option>
           <option value="english"> english </option>
@@ -81,7 +72,7 @@ class Menu extends Component {
         <br />
         <button onClick={() => this.setState({ sort: !this.state.sort })}> Sort Alphabetically </button>
         <ul>
-         {this.filterByType()}
+         {this.sortItems()}
         </ul>
       </div>  
     )
