@@ -20,7 +20,7 @@ import PropTypes from "prop-types";
 import getAddressFromCoords from "./utils/getAddressFromCoords";
 import LoadingDots from "./LoadingDots";
 
-class App extends React.Component {
+class GeoPosition extends React.Component {
   state = {
     coords: {
       latitude: null,
@@ -67,5 +67,10 @@ class App extends React.Component {
     );
   }
 }
+
+class App extends React.Component {
+  
+}
+
 
 ReactDOM.render(<App />, document.getElementById("app"));

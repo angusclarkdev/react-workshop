@@ -56,13 +56,14 @@ class Menu extends Component {
       sortedItems = sortedItems.sort(sortBy("name"))
     }
 
-    return sortedItems.map(i => <li key={i.id}> {i.name} </li>)
+    return sortedItems.map(i => <li className='list-item' key={i.id}> {i.name} </li>)
   }
 
   render() { 
     return (
-      <div>
+      <div className='wrapper'>
         <h1 className="title"> Menu </h1>
+        <div className="options">
         <select name="" id="" onChange={(e) => this.setState({ filtered: e.target.value, sort: false })}>
           <option value="all"> all </option>
           <option value="mexican"> mexican </option>
@@ -70,8 +71,9 @@ class Menu extends Component {
         </select>
         <br/>
         <br />
-        <button onClick={() => this.setState({ sort: !this.state.sort })}> Sort Alphabetically </button>
-        <ul>
+        <button className='btn-sort' onClick={() => this.setState({ sort: !this.state.sort })}> Sort Alphabetically </button>
+        </div>
+        <ul className='menu-list'>
          {this.sortItems()}
         </ul>
       </div>  

@@ -1,3 +1,40 @@
+.wrapper {
+  background-color: #FFE99B;
+  width: 40%;
+  text-align: center;
+  margin: 0 auto;
+  box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, .3)
+}
+
 .title {
   color: red;
+  padding: 1rem;
+}
+
+.options {
+  display: flex;
+  justify-content: space-around;
+  width: 30%;
+  margin: 0 auto;
+}
+
+.menu-list {
+  -webkit-padding-start: 0;
+}
+
+.list-item {
+  list-style: none;
+  padding: 1rem;
+  border-bottom: 1px dashed black;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.btn-sort {
+  background-color: white;
+  color: 
 }
