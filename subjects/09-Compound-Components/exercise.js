@@ -21,25 +21,67 @@ import React from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>♬ It's about time that we all turned off the radio ♫</h1>
+
+        <RadioGroup defaultValue="fm">
+          <RadioOption value="am"> AM </RadioOption>
+          <RadioOption value="fm"> FM </RadioOption>
+          <RadioOption value="tape"> Tape </RadioOption>
+          <RadioOption value="aux"> Aux </RadioOption>
+        </RadioGroup>
+      </div>
+    );
+  }
+}
+
 class RadioGroup extends React.Component {
-  static propTypes = {
-    defaultValue: PropTypes.string
+  defaultValue: PropTypes.string
+    static propTypes = {
   };
 
+  state = {
+    value: this.props.defaultValue
+  }
+
+  handleClick = (e) => {
+   console.log("clicked");
+   
+    this.setState({
+      value: e
+    })
+  }
+
   render() {
-    return <div>{this.props.children}</div>;
+    
+    const children = React.Children.map(this.props.children, (child) => {
+      return React.cloneElement(child, {
+        isSelected: child.props.value === this.state.value, 
+        handleClick: () => this.handleClick(child.props.value) })
+    })
+    
+    return <div>{children}</div>;
   }
 }
 
 class RadioOption extends React.Component {
+
   static propTypes = {
     value: PropTypes.string
   };
 
+ 
+
   render() {
+    console.log(this.props);
+  
     return (
-      <div>
-        <RadioIcon isSelected={false} /> {this.props.children}
+      <div onClick={this.props.handleClick}>
+        <RadioIcon isSelected={this.props.isSelected} /> {this.props.children}
+        
       </div>
     );
   }
@@ -66,23 +108,6 @@ class RadioIcon extends React.Component {
       />
     );
   }
-}
+}  
 
-class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>♬ It's about time that we all turned off the radio ♫</h1>
-
-        <RadioGroup defaultValue="fm">
-          <RadioOption value="am">AM</RadioOption>
-          <RadioOption value="fm">FM</RadioOption>
-          <RadioOption value="tape">Tape</RadioOption>
-          <RadioOption value="aux">Aux</RadioOption>
-        </RadioGroup>
-      </div>
-    );
-  }
-}
-
-ReactDOM.render(<App />, document.getElementById("app"));
+ReactDOM.render(<App />, document.getElementById("app")); 
