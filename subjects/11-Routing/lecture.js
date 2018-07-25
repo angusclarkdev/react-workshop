@@ -1,29 +1,29 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-function About() {
-  return <h2>About</h2>;
-}
+// function About() {
+//   return <h2>About</h2>;
+// }
 
-function Inbox() {
-  return <h2>Inbox</h2>;
-}
+// function Inbox() {
+//   return <h2>Inbox</h2>;
+// }
 
-function Home() {
-  return <h2>Home</h2>;
-}
+// function Home() {
+//   return <h2>Home</h2>;
+// }
 
-class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>Welcome to the app!</h1>
-      </div>
-    );
-  }
-}
+// class App extends React.Component {
+//   render() {
+//     return (
+//       <div>
+//         <h1>Welcome to the app!</h1>
+//       </div>
+//     );
+//   }
+// }
 
-ReactDOM.render(<App />, document.getElementById("app"));
+// ReactDOM.render(<App />, document.getElementById("app"));
 
 ////////////////////////////////////////////////////////////////////////////////
 // Setup a hashchange listener so we know when the URL changes. When it does,
@@ -94,42 +94,42 @@ ReactDOM.render(<App />, document.getElementById("app"));
 ////////////////////////////////////////////////////////////////////////////////
 // Now, with React Router
 
-// import { HashRouter as Router, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Route, Link } from "react-router-dom";
 
-// function About() {
-//   return <h2>About</h2>;
-// }
+function About() {
+  return <h2>About</h2>;
+}
 
-// function Inbox() {
-//   return <h2>Inbox</h2>;
-// }
+function Inbox() {
+  return <h2>Inbox</h2>;
+}
 
-// function Home() {
-//   return <h2>Home</h2>;
-// }
+function Home() {
+  return <h2>Home</h2>;
+}
 
-// class App extends React.Component {
-//   render() {
-//     return (
-//       <Router>
-//         <div>
-//           <h1>Welcome to the app!</h1>
-//
-//           <nav>
-//             <ul>
-//               <li><Link to="/">Home</Link></li>
-//               <li><Link to="/about">About</Link></li>
-//               <li><Link to="/inbox">Inbox</Link></li>
-//             </ul>
-//           </nav>
-//
-//           <Route exact path="/" component={Home} />
-//           <Route path="/about" component={About} />
-//           <Route path="/inbox" component={Inbox} />
-//         </div>
-//       </Router>
-//     );
-//   }
-// }
+class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        <div>
+          <h1>Welcome to the app!</h1>
 
-// ReactDOM.render(<App />, document.getElementById("app"));
+          <nav>
+            <ul>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/about">About</Link></li>
+              <li><Link to="/inbox">Inbox</Link></li>
+            </ul>
+          </nav>
+
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/inbox" component={Inbox} />
+        </div>
+      </Router>
+    );
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById("app"));

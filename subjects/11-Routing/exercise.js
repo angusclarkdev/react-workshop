@@ -2,9 +2,9 @@
 // Exercise:
 //
 // - Wrap the <Home> component in <App>'s render method in a <Router>. This
-//   provides the right context for the <Link>s and <Route>s we will create
-// - Create a <Link> to /user/:userId for each person in <Home>
-// - When a person's <Link> is clicked, render <Profile> instead of <Home>.
+//   provides the right context for the <Link>s and <Route>s we will create [x]
+// - Create a <Link> to /user/:userId for each person in <Home> [x]
+// - When a person's <Link> is clicked, render <Profile> instead of <Home>. 
 //   Hints: You can get the person's userId from <Profile>'s "match" prop
 //   which it gets from the router. Also, you'll probably want to wrap
 //   <Home> and <Profile> in a <Switch> in <App>'s render method
@@ -20,13 +20,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 import React from "react";
 import ReactDOM from "react-dom";
-import {
-  HashRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect
-} from "react-router-dom";
+import { HashRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 import Gravatar from "./Gravatar";
 
 const USERS = [
@@ -35,7 +29,10 @@ const USERS = [
     name: "Michael Jackson",
     email: "michael@reacttraining.com"
   },
-  { id: 2, name: "React Training", email: "hello@reacttraining.com" }
+  { id: 2, 
+    name: "React Training", 
+    email: "hello@reacttraining.com" 
+  }
 ];
 
 function getUserByID(id) {
@@ -48,7 +45,8 @@ function getUserByID(id) {
 
 function Home() {
   const contactItems = USERS.map(user => (
-    <li key={user.email}>{user.name}</li>
+    <li key={user.email}> 
+      <Link to={`/profile/${user.id}`}> {user.name} </Link> </li>
   ));
 
   return (
@@ -59,7 +57,9 @@ function Home() {
   );
 }
 
-function Profile() {
+const Profile = (props) => {
+  
+
   const userId = 1; // TODO: Get this from the URL!
   const user = getUserByID(userId);
 
@@ -87,7 +87,19 @@ function App() {
   return (
     <div>
       <h1>People Viewer</h1>
-      <Home />
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/profile/:userID" component={Profile} />
+          <Route
+            path="/users/:userId"
+            render={({ match }) => (
+              <Redirect to={`/profile/${match.params.userId}`} />
+            )}
+          />
+          <Route component={NoMatch} />
+        </Switch>
+      </Router>
     </div>
   );
 }

@@ -62,6 +62,8 @@ function Home() {
 }
 
 function Profile({ match }) {
+  
+  
   const { userId } = match.params;
   const user = getUserByID(userId);
 
